@@ -1,22 +1,24 @@
 import pygame
 import math
-from cell import Cell
 
 
 n = int(input())
 m = int(input())
 
-screen_w = 1280
-screen_h = math.floor(1280 * n/m) + 1
+def_w = 480
+def_h = 360
 
-cell_w = math.floor(1280/m)
-cell_h = math.floor(720/n)
+screen_w = def_w
+screen_h = math.floor(def_w * n/m) + 1
+
+cell_w = math.floor(def_w/m)
+cell_h = math.floor(def_h/n)
 
 cells = [[0 for x in range(1000)] for y in range(1000)]
 
 for i in range(n):
     for j in range(m):
-        cells[i][j] = Cell(i, j)
+        cells[i][j] = False
 
 size = (width, height) = screen_w, screen_h
 pygame.init()
