@@ -2,14 +2,14 @@ import pygame
 import math
 
 
-n = int(input("height: "))
-m = int(input("width: "))
+n = 100
+m = 50
 
-def_w = 480
-def_h = 360
+def_w = 500
+def_h = 1000
 
-screen_w = def_w
-screen_h = math.floor(def_w * n/m)
+screen_w = 1000
+screen_h = 500
 
 cell_w = math.floor(def_w/m)
 cell_h = math.floor(def_h/n)
@@ -31,7 +31,6 @@ def draw(x, y):
     color = (255,255,255)
     if cells[x][y] == 1:
         color = (0,0,0,0)
-        # print(cell.x)
     pygame.draw.rect(win, color, ((x)*cell_w, (y)*cell_h, cell_w, cell_h))
     pygame.draw.rect(win, (0,0,0,0), ((x)*cell_w, (y)*cell_h, cell_w, cell_h), 1)
 
@@ -53,8 +52,6 @@ while running is 1:
 
     for i in range(n):
         for j in range(m):
-            cell = cells[j][i]
-            # if i % 5 == 0 and j % 5 ==0:
-            #     cell.blocked = 1
-            draw(j, i)
+            cell = cells[i][j]
+            draw(i, j)
     pygame.display.update()
