@@ -1,6 +1,6 @@
 import pygame
 import math
-
+from algorithm import *
 
 n = 100
 m = 50
@@ -37,7 +37,7 @@ def draw(x, y):
 def get_cell(x, y):
     return (x/cell_w, y/cell_h)
 
-while running is 1:
+while running == 1:
 
     win.fill(0)
 
@@ -49,9 +49,14 @@ while running is 1:
             cell_pos = get_cell(pos[0], pos[1])
             print(cell_pos)
             cells[math.floor(cell_pos[0])][math.floor(cell_pos[1])] = 1
+            if math.floor(cell_pos[0]) == 49 and math.floor(cell_pos[1]) == 99:
+                running = 0
 
     for i in range(n):
         for j in range(m):
             cell = cells[i][j]
             draw(i, j)
     pygame.display.update()
+    
+Lee()
+_cout()
