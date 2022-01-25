@@ -1,6 +1,6 @@
 import pygame
 import math
-from algorithm import *
+#from algorithm import *
 
 n = 100
 m = 50
@@ -47,16 +47,46 @@ while running == 1:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             cell_pos = get_cell(pos[0], pos[1])
-            print(cell_pos)
             cells[math.floor(cell_pos[0])][math.floor(cell_pos[1])] = 1
-            if math.floor(cell_pos[0]) == 49 and math.floor(cell_pos[1]) == 99:
-                running = 0
 
     for i in range(n):
         for j in range(m):
             cell = cells[i][j]
             draw(i, j)
     pygame.display.update()
-    
+
+queue = []
+track = [[0 for i in range(1000)] for j in range(1000)]
+di = [0 , 0 , 1 , -1]
+dj = [1 , -1 , 0 , 0]
+
+def inMatrix(i : int , j : int):
+    if i >= 0 and i < 50 and j >= 0 and j < 100:
+        return 1
+    return 0
+
+def Lee():
+    for col in range(101):
+        if cells[0][col] == 0:
+            queue.append((0 , col))
+            track[0][col] = 1
+    while len(queue) > 0:
+        i = queue[0][0]
+        j = queue[0][1]
+        queue.pop(0)
+        for k in range(4):
+            newI = i + di[k]
+            newJ = j + dj[k]
+            if inMatrix(newI , newJ) and cells[newI][newJ] == 0 and track[newI][newJ] == 0:
+                queue.append((newI , newJ))
+                track[newI][newJ] = track[i][j] + 1
+
+def _cout():
+    maxim = 0
+    for col in range(100):
+        if track[49][col] > maxim:
+            maxim = track[49][col]
+    print(maxim)
+
 Lee()
 _cout()
